@@ -8,13 +8,20 @@ var producerConfig = new ProducerConfig
     BootstrapServers = "localhost:9092"
 };
 
-var producer = new ProducerBuilder<Null, string>(producerConfig).Build();
+var producer = new ProducerBuilder<string, string>(producerConfig).Build();
 
 while (true)
 {
-    var userName =Faker.Name.FirstName();
-    Console.WriteLine($"Creating User: {userName}");
-    var result = producer.ProduceAsync("users-string", new Message<Null, string> { Value = userName }).GetAwaiter().GetResult();
+    var user = new User{
+        Id = Guid.NewGuid().ToString(),
+        FirstName = Faker.Name.FirstName(),
+        LastName = Faker.Name.LastName()
+    };
+    Console.WriteLine($"Creating User: {user.FirstName}");
+    producer.ProduceAsync("users-json", new Message<string, string> {
+        Key = user.Id,
+        Value = JsonSerializer.Serialize(user) 
+        }).GetAwaiter().GetResult();
 
     Thread.Sleep(1000);
 }

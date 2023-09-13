@@ -5,16 +5,18 @@ using System.Text.Json;
 var consumerConfig = new ConsumerConfig
 {
     BootstrapServers = "localhost:9092",
-    GroupId = "dotnet-users-string",
+    GroupId = "dotnet-users-json",
     AutoOffsetReset = AutoOffsetReset.Earliest
 };
 
-using(var consumer = new ConsumerBuilder<Null, string>(consumerConfig).Build())
+using(var consumer = new ConsumerBuilder<string, string>(consumerConfig).Build())
 {
-    consumer.Subscribe("users-string");
+    consumer.Subscribe("users-json");
     while(true)
     {
         var consumerResult = consumer.Consume();
-        Console.WriteLine($"Received User: {consumerResult.Message.Value}");
+        var user = JsonSerializer.Deserialize<User>(consumerResult.Message.Value);
+
+        Console.WriteLine($"Received User: Key={user.Id} {user.FirstName}");
     }
 }
