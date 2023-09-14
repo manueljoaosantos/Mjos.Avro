@@ -1,27 +1,37 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Confluent.Kafka;
-using System;
-using System.Text.Json;
+using Confluent.SchemaRegistry;
+using Confluent.SchemaRegistry.Serdes;
+using mjos.avro;
 
-var producerConfig = new ProducerConfig
+var config  = new ProducerConfig
 { 
     BootstrapServers = "localhost:9092"
 };
 
-var producer = new ProducerBuilder<string, string>(producerConfig).Build();
+ var schemaRegistryConfig = new SchemaRegistryConfig
+    {
+        Url = "localhost:8500"
+    };
+var schemaRegistry = new CachedSchemaRegistryClient(schemaRegistryConfig);
+var producer = new ProducerBuilder<Null, user>(config)
+    .SetValueSerializer(new AvroSerializer<user>(schemaRegistry))
+    .Build();
 
 while (true)
 {
-    var user = new User{
-        Id = Guid.NewGuid().ToString(),
-        FirstName = Faker.Name.FirstName(),
-        LastName = Faker.Name.LastName()
+    var user = new user()
+    {
+        firstname = Faker.Name.FirstName(),
+        lastname = Faker.Name.LastName()
     };
-    Console.WriteLine($"Creating User: {user.FirstName}");
-    producer.ProduceAsync("users-json", new Message<string, string> {
-        Key = user.Id,
-        Value = JsonSerializer.Serialize(user) 
-        }).GetAwaiter().GetResult();
+
+    Console.WriteLine($"Creating user {user.firstname}");
+
+    await producer.ProduceAsync("users-avro", new Message<Null, user>()
+    {
+        Value = user
+    });
 
     Thread.Sleep(1000);
 }
