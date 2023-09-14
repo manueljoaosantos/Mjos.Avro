@@ -9,6 +9,10 @@
   <ItemGroup>
     <PackageReference Include="Confluent.Kafka" Version="2.2.0" />
     <PackageReference Include="Faker.Data" Version="2.0.1" />
+    <PackageReference Include="Confluent.SchemaRegistry" Version="2.2.0" />
+    <PackageReference Include="Confluent.SchemaRegistry.Serdes.Avro" Version="2.2.0" />
   </ItemGroup>
-
+<ItemGroup>
+  <ProjectReference Include="..\Mjos.Avro.Schema\Mjos.Avro.Schema.csproj"></ProjectReference>
+</ItemGroup>
 </Project>

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjos.Avro.Producer", "Mjos.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjos.Avro.Consumer", "Mjos.Avro.Consumer\Mjos.Avro.Consumer.csproj", "{6234C7AA-6E5F-43BC-9716-682C9E3F24F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjos.Avro.Schema", "Mjos.Avro.Schema\Mjos.Avro.Schema.csproj", "{7D68391C-E7C8-4B96-A8FC-A48CAE80B4C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{6234C7AA-6E5F-43BC-9716-682C9E3F24F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6234C7AA-6E5F-43BC-9716-682C9E3F24F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6234C7AA-6E5F-43BC-9716-682C9E3F24F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D68391C-E7C8-4B96-A8FC-A48CAE80B4C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D68391C-E7C8-4B96-A8FC-A48CAE80B4C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D68391C-E7C8-4B96-A8FC-A48CAE80B4C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D68391C-E7C8-4B96-A8FC-A48CAE80B4C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
