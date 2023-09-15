@@ -15,3 +15,7 @@ dotnet sln add .\Mjos.Avro.Schema\
 ```
 
 dotnet tool install --global Apache.Avro.Tools --version 1.11.2
+
+dotnet add package Mjos.Avro --version 1.1.0
+
+dotnet nuget push foo.nupkg -k oy2ccobqtagedjjjfpiaip2gkugtz4cubjkqmupamv5fo4
